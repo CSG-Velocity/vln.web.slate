@@ -8,7 +8,7 @@ pipeline {
         // SONAR=credentials("sonar-token")
         // scannerHome = tool 'SonarScanner-msbuild'
         // DOTNET7LOCATION = '/var/lib/jenkins/external_tools/dotnet-sdk/dotnet-sdk-7.0'
-        BASTIONIP = '172.174.239.212'
+        BASTIONIP = '172.190.121.108'
         BASTIONUSER = 'velocityln'
         GIT_COMMIT_SHORT = sh(
                 script: "printf \$(git rev-parse --short ${GIT_COMMIT})",
