@@ -62,19 +62,19 @@ pipeline {
                 }
             }
         }
-        // stage('Docker Build & Push using Bastion') {
-        //     steps {
-        //         withCredentials([sshUserPrivateKey(credentialsId: "velocitydevvm", keyFileVariable: 'keyfile')]) {
-        //             sh """
-        //                 ssh -i ${keyfile} ${BASTIONUSER}'@'${BASTIONIP} "cd ${SERVICE_NAME}/${env.BRANCH_NAME}; \
-        //                 sudo docker build -t ${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT} .; \
-        //                 sudo docker tag ${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT}:latest velocfxdevityacr.azurecr.io/${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT}-images:${GIT_COMMIT_SHORT}; \
-        //                 sudo docker push velocfxdevityacr.azurecr.io/${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT}-images:${GIT_COMMIT_SHORT};
-        //                 "
-        //             """
-        //         }
-        //     }
-        // }
+        stage('Docker Build & Push using Bastion') {
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: "velocitydevvm", keyFileVariable: 'keyfile')]) {
+                    sh """
+                        ssh -i ${keyfile} ${BASTIONUSER}'@'${BASTIONIP} "cd ${SERVICE_NAME}/${env.BRANCH_NAME}; \
+                        sudo docker build -t ${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT} .; \
+                        #sudo docker tag ${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT}:latest velocfxdevityacr.azurecr.io/${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT}-images:${GIT_COMMIT_SHORT}; \
+                        #sudo docker push velocfxdevityacr.azurecr.io/${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT}-images:${GIT_COMMIT_SHORT};
+                        "
+                    """
+                }
+            }
+        }
         // stage('Deploying to AKS using Bastion') {
         //     when {
         //         allOf {
