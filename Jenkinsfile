@@ -75,47 +75,47 @@ pipeline {
                 }
             }
         }
-        // stage('Deploying to AKS using Bastion') {
-        //     when {
-        //         allOf {
-        //             expression { environment name: 'DEPLOYMENT_ENVIRONMENT', value: 'dev'}
-        //             expression { environment name: 'DEPLOYMENT_ENVIRONMENT', value: 'qa'}
-        //         }
-        //     }
-        //     steps {
-        //         withCredentials([sshUserPrivateKey(credentialsId: "velocitydevvm", keyFileVariable: 'keyfile')]) {
-        //             sh """
-        //                 ssh -i ${keyfile} ${BASTIONUSER}'@'${BASTIONIP} "cd k8/${SERVICE_NAME}/${env.BRANCH_NAME}; \
-        //                 sed 's/_IMAGE_/${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT}-images/g' deployment-template.yml > ${SERVICE_NAME}-deployment.yml; \
-        //                 sed -i 's/_VERSION_/${GIT_COMMIT_SHORT}/g' ${SERVICE_NAME}-deployment.yml; \
-        //                 sudo kubectl apply -f ${SERVICE_NAME}-deployment.yml
-        //                 "
-        //             """
-        //         }
-        //     }
-        // }
-        // stage("RELEASE_TAG"){
-        //     when { 
-        //         environment name: 'DEPLOYMENT_ENVIRONMENT', value: 'uat' 
-        //     }
-        //     steps{
-        //         sh """
-        //             git tag -a $GIT_COMMIT_SHORT -m 'Release version - $GIT_COMMIT_SHORT'
-        //             git push git@github.com:CSG-Velocity/Vfx.Services.SysAdmin.git $GIT_COMMIT_SHORT
-        //         """
-        //     }
-        // }
-        // stage('CleanUP') {
-        //     steps {
-        //        withCredentials([sshUserPrivateKey(credentialsId: "velocitydevvm", keyFileVariable: 'keyfile')]) {
-        //             sh """
-        //                 ssh -i ${keyfile} ${BASTIONUSER}'@'${BASTIONIP} "sudo docker rmi -f ${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT}:latest; \
-        //                 sudo docker rmi -f velocfxdevityacr.azurecr.io/${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT}-images:${GIT_COMMIT_SHORT};
-        //                 "
-        //             """
-        //         }
-        //     }
-        // }
+        stage('Deploying to AKS using Bastion') {
+            when {
+                allOf {
+                    expression { environment name: 'DEPLOYMENT_ENVIRONMENT', value: 'dev'}
+                    expression { environment name: 'DEPLOYMENT_ENVIRONMENT', value: 'qa'}
+                }
+            }
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: "velocitylndevvm", keyFileVariable: 'keyfile')]) {
+                    sh """
+                        ssh -i ${keyfile} ${BASTIONUSER}'@'${BASTIONIP} "cd k8/${SERVICE_NAME}/${env.BRANCH_NAME}; \
+                        sed 's/_IMAGE_/${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT}-images/g' deployment-template.yml > ${SERVICE_NAME}-deployment.yml; \
+                        sed -i 's/_VERSION_/${GIT_COMMIT_SHORT}/g' ${SERVICE_NAME}-deployment.yml; \
+                        sudo kubectl apply -f ${SERVICE_NAME}-deployment.yml
+                        "
+                    """
+                }
+            }
+        }
+        stage("RELEASE_TAG"){
+            when { 
+                environment name: 'DEPLOYMENT_ENVIRONMENT', value: 'uat' 
+            }
+            steps{
+                sh """
+                    git tag -a $GIT_COMMIT_SHORT -m 'Release version - $GIT_COMMIT_SHORT'
+                    git push git@github.com:CSG-Velocity/vln.web.slate.git $GIT_COMMIT_SHORT
+                """
+            }
+        }
+        stage('CleanUP') {
+            steps {
+               withCredentials([sshUserPrivateKey(credentialsId: "velocitylndevvm", keyFileVariable: 'keyfile')]) {
+                    sh """
+                        ssh -i ${keyfile} ${BASTIONUSER}'@'${BASTIONIP} "sudo docker rmi -f ${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT}:latest; \
+                        sudo docker rmi -f velocfxdevityacr.azurecr.io/${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT}-images:${GIT_COMMIT_SHORT};
+                        "
+                    """
+                }
+            } 
+        }
     }
 }
 
