@@ -64,7 +64,7 @@ pipeline {
         }
         stage('Docker Build & Push using Bastion') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: "velocitydevvm", keyFileVariable: 'keyfile')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: "velocitylndevvm", keyFileVariable: 'keyfile')]) {
                     sh """
                         ssh -i ${keyfile} ${BASTIONUSER}'@'${BASTIONIP} "cd ${SERVICE_NAME}/${env.BRANCH_NAME}; \
                         sudo docker build -t ${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT} .; \
