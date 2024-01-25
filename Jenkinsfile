@@ -117,6 +117,14 @@ pipeline {
             } 
         }
     }
+    post {
+        success {
+            office365ConnectorSend color: '#008000',message: "$BUILD_NUMBER - v$GIT_COMMIT_SHORT deployed successfully!)",status: "Success", webhookUrl: "${Velocityln_WEB_HOOK_URL}"
+       }
+       failure {
+           office365ConnectorSend color: '#FF0000',message: "$BUILD_NUMBER - v$GIT_COMMIT_SHORT deployment failed!)",status: 'Failed', webhookUrl: "${Velocityln_WEB_HOOK_URL}"
+       }
+    }
 }
 
 
