@@ -1,5 +1,5 @@
 ---
-title: SLP Service v1.0
+title: VelocityLN Service v1.0
 language_tabs:
   - shell: Shell
   - http: HTTP
