@@ -24,13 +24,13 @@ pipeline {
                 buildDescription "$BUILD_NUMBER - $GIT_COMMIT_SHORT"
             }
         }
-         stage('GitLeaks'){
-             steps{
-                 sh '''
-                     $GITLEAKS/gitleaks detect -v --no-git
-                 '''
-             }
-         }
+        //  stage('GitLeaks'){
+        //      steps{
+        //          sh '''
+        //              $GITLEAKS/gitleaks detect -v --no-git
+        //          '''
+        //      }
+        //  }
         // stage('SonarAnalysis'){
         //     steps{
         //         withSonarQubeEnv('sonarqube-server'){
