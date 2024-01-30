@@ -2,6 +2,7 @@
 title: VelocityLN Service v1.0
 language_tabs:
   - shell: Shell
+  - c#: C#
   - http: HTTP
   - javascript: JavaScript
   - ruby: Ruby
