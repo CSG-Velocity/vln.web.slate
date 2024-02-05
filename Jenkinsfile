@@ -6,7 +6,7 @@ pipeline {
         SERVICE_NAME = getservicename(env.GIT_URL.replaceFirst(/^.*\/([^\/]+?).git$/, '$1'))
         GITLEAKS='/var/lib/jenkins/external_tools/gitleaks/8.18.0'
         // SONAR=credentials("sonar-token")
-        // scannerHome = tool 'SonarScanner-msbuild'
+        scannerHome = tool 'SonarScanner-msbuild'
         // DOTNET7LOCATION = '/var/lib/jenkins/external_tools/dotnet-sdk/dotnet-sdk-7.0'
         BASTIONIP = '172.190.121.108'
         BASTIONUSER = 'velocityln'
@@ -31,18 +31,21 @@ pipeline {
         //          '''
         //      }
         //  }
-        // stage('SonarAnalysis'){
-        //     steps{
-        //         withSonarQubeEnv('sonarqube-server'){
-        //             sh '''
-        //                 $DOTNET7LOCATION/dotnet ${scannerHome}/SonarScanner.MSBuild.dll begin /k:"${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT}" /d:sonar.host.url="https://cd-builds.compunnel.com/sonar" /d:sonar.login="${SONAR}"  /d:sonar.cs.opencover.reportsPaths="**/*opencover.xml" /d:sonar.coverage.exclusions="**TestCases*.cs" /v:$GIT_COMMIT_SHORT
-        //                 $DOTNET7LOCATION/dotnet build -c Release Vfx.Services.SysAdmin.sln
-        //                 $DOTNET7LOCATION/dotnet test tests/Vfx.Services.SysAdmin.API.Tests.Unit/Vfx.Services.SysAdmin.API.Tests.Unit.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
-        //                 $DOTNET7LOCATION/dotnet ${scannerHome}/SonarScanner.MSBuild.dll end /d:sonar.login=$SONAR
-        //             '''
-        //         }
-        //     }
-        // }
+        stage('SonarAnalysis'){
+            steps {
+                script {
+                // def scannerHome = tool 'sonarqube-scanner';
+                    withSonarQubeEnv("sonarqube-server") {
+                        sh "${tool("sonarqube-scanner")}/bin/sonar-scanner \
+                        -Dsonar.projectKey=${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT} \
+                        -Dsonar.projectName=${ORG_NAME}-${SERVICE_NAME}-${DEPLOYMENT_ENVIRONMENT} \
+                        -Dsonar.projectVersion=$GIT_COMMIT_SHORT \
+                        -Dsonar.sources=. \
+                        -Dsonar.language=."
+                    }
+                }
+            }
+        }
         // stage('Quality Gate') {
         //     steps {
         //         timeout(time: 1, unit: 'HOURS') {
