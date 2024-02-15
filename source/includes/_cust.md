@@ -1,4 +1,22 @@
 
+
+<!-- Generator: Widdershins v4.0.1 -->
+
+<h1 id="slp-service1-0">SLP Service1.0 v1.0</h1>
+
+> Scroll down for code samples, example requests and responses. Select a language for code samples from the tabs above or the mobile navigation menu.
+
+API Description
+
+<a href="https://velocitymsp.ai">Terms of service</a>
+Email: <a href="mailto:support@velocitymsp.ai">Support</a> 
+License: <a href="https://velocitymsp.ai/license1">Example License</a>
+
+# Authentication
+
+* API Key (Bearer)
+    - Parameter Name: **Authorization**, in: header. JWT Authorization header {token}
+
 <h1 id="slp-service1-0-client">Client</h1>
 
 ## post__api_v1_Client_AddBusinessWorkLocation
@@ -905,6 +923,599 @@ func main() {
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|None|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+Bearer
+</aside>
+
+## post__api_v1_Client_GetCustomerWLContacts
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST /api/v1/Client/GetCustomerWLContacts \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: API_KEY'
+
+```
+
+```http
+POST /api/v1/Client/GetCustomerWLContacts HTTP/1.1
+
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "intStart": 0,
+  "intPageSize": 0,
+  "intSortColumn": 0,
+  "sortDirection": "string",
+  "customerWorkLocationId": 0,
+  "customerContactId": 0
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'API_KEY'
+};
+
+fetch('/api/v1/Client/GetCustomerWLContacts',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'API_KEY'
+}
+
+result = RestClient.post '/api/v1/Client/GetCustomerWLContacts',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'API_KEY'
+}
+
+r = requests.post('/api/v1/Client/GetCustomerWLContacts', headers = headers)
+
+print(r.json())
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Content-Type' => 'application/json',
+    'Accept' => 'application/json',
+    'Authorization' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('POST','/api/v1/Client/GetCustomerWLContacts', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```java
+URL obj = new URL("/api/v1/Client/GetCustomerWLContacts");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "/api/v1/Client/GetCustomerWLContacts", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /api/v1/Client/GetCustomerWLContacts`
+
+> Body parameter
+
+```json
+{
+  "intStart": 0,
+  "intPageSize": 0,
+  "intSortColumn": 0,
+  "sortDirection": "string",
+  "customerWorkLocationId": 0,
+  "customerContactId": 0
+}
+```
+
+<h3 id="post__api_v1_client_getcustomerwlcontacts-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|body|body|[SLP.Services.Domain.Model.Request.Client.GetCustomerWLContactsRequestModel](#schemaslp.services.domain.model.request.client.getcustomerwlcontactsrequestmodel)|false|none|
+
+> Example responses
+
+> 400 Response
+
+```json
+{
+  "type": "string",
+  "title": "string",
+  "status": 0,
+  "detail": "string",
+  "instance": "string",
+  "property1": null,
+  "property2": null
+}
+```
+
+<h3 id="post__api_v1_client_getcustomerwlcontacts-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+Bearer
+</aside>
+
+## get__api_v1_Client_GetCustomerWorkLocationContactList
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET /api/v1/Client/GetCustomerWorkLocationContactList \
+  -H 'Accept: application/json' \
+  -H 'Authorization: API_KEY'
+
+```
+
+```http
+GET /api/v1/Client/GetCustomerWorkLocationContactList HTTP/1.1
+
+Accept: application/json
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'API_KEY'
+};
+
+fetch('/api/v1/Client/GetCustomerWorkLocationContactList',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Accept' => 'application/json',
+  'Authorization' => 'API_KEY'
+}
+
+result = RestClient.get '/api/v1/Client/GetCustomerWorkLocationContactList',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Accept': 'application/json',
+  'Authorization': 'API_KEY'
+}
+
+r = requests.get('/api/v1/Client/GetCustomerWorkLocationContactList', headers = headers)
+
+print(r.json())
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Accept' => 'application/json',
+    'Authorization' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('GET','/api/v1/Client/GetCustomerWorkLocationContactList', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```java
+URL obj = new URL("/api/v1/Client/GetCustomerWorkLocationContactList");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("GET");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("GET", "/api/v1/Client/GetCustomerWorkLocationContactList", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`GET /api/v1/Client/GetCustomerWorkLocationContactList`
+
+<h3 id="get__api_v1_client_getcustomerworklocationcontactlist-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|CustId|query|string|false|none|
+|WorkLocationId|query|integer(int32)|false|none|
+
+> Example responses
+
+> 400 Response
+
+```json
+{
+  "type": "string",
+  "title": "string",
+  "status": 0,
+  "detail": "string",
+  "instance": "string",
+  "property1": null,
+  "property2": null
+}
+```
+
+<h3 id="get__api_v1_client_getcustomerworklocationcontactlist-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
+|500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|None|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+Bearer
+</aside>
+
+## post__api_v1_Client_DeleteCustomerWorkLocationContact
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X POST /api/v1/Client/DeleteCustomerWorkLocationContact \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json' \
+  -H 'Authorization: API_KEY'
+
+```
+
+```http
+POST /api/v1/Client/DeleteCustomerWorkLocationContact HTTP/1.1
+
+Content-Type: application/json
+Accept: application/json
+
+```
+
+```javascript
+const inputBody = '{
+  "custWorkLocation_ContactId": 0
+}';
+const headers = {
+  'Content-Type':'application/json',
+  'Accept':'application/json',
+  'Authorization':'API_KEY'
+};
+
+fetch('/api/v1/Client/DeleteCustomerWorkLocationContact',
+{
+  method: 'POST',
+  body: inputBody,
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+```ruby
+require 'rest-client'
+require 'json'
+
+headers = {
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json',
+  'Authorization' => 'API_KEY'
+}
+
+result = RestClient.post '/api/v1/Client/DeleteCustomerWorkLocationContact',
+  params: {
+  }, headers: headers
+
+p JSON.parse(result)
+
+```
+
+```python
+import requests
+headers = {
+  'Content-Type': 'application/json',
+  'Accept': 'application/json',
+  'Authorization': 'API_KEY'
+}
+
+r = requests.post('/api/v1/Client/DeleteCustomerWorkLocationContact', headers = headers)
+
+print(r.json())
+
+```
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$headers = array(
+    'Content-Type' => 'application/json',
+    'Accept' => 'application/json',
+    'Authorization' => 'API_KEY',
+);
+
+$client = new \GuzzleHttp\Client();
+
+// Define array of request body.
+$request_body = array();
+
+try {
+    $response = $client->request('POST','/api/v1/Client/DeleteCustomerWorkLocationContact', array(
+        'headers' => $headers,
+        'json' => $request_body,
+       )
+    );
+    print_r($response->getBody()->getContents());
+ }
+ catch (\GuzzleHttp\Exception\BadResponseException $e) {
+    // handle exception or api errors.
+    print_r($e->getMessage());
+ }
+
+ // ...
+
+```
+
+```java
+URL obj = new URL("/api/v1/Client/DeleteCustomerWorkLocationContact");
+HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+con.setRequestMethod("POST");
+int responseCode = con.getResponseCode();
+BufferedReader in = new BufferedReader(
+    new InputStreamReader(con.getInputStream()));
+String inputLine;
+StringBuffer response = new StringBuffer();
+while ((inputLine = in.readLine()) != null) {
+    response.append(inputLine);
+}
+in.close();
+System.out.println(response.toString());
+
+```
+
+```go
+package main
+
+import (
+       "bytes"
+       "net/http"
+)
+
+func main() {
+
+    headers := map[string][]string{
+        "Content-Type": []string{"application/json"},
+        "Accept": []string{"application/json"},
+        "Authorization": []string{"API_KEY"},
+    }
+
+    data := bytes.NewBuffer([]byte{jsonReq})
+    req, err := http.NewRequest("POST", "/api/v1/Client/DeleteCustomerWorkLocationContact", data)
+    req.Header = headers
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    // ...
+}
+
+```
+
+`POST /api/v1/Client/DeleteCustomerWorkLocationContact`
+
+> Body parameter
+
+```json
+{
+  "custWorkLocation_ContactId": 0
+}
+```
+
+<h3 id="post__api_v1_client_deletecustomerworklocationcontact-parameters">Parameters</h3>
+
+|Name|In|Type|Required|Description|
+|---|---|---|---|---|
+|WorkLocationId|query|integer(int32)|false|none|
+|body|body|[SLP.Services.Domain.Model.Request.Client.DeleteCustomerWorkLocationContactRequestModel](#schemaslp.services.domain.model.request.client.deletecustomerworklocationcontactrequestmodel)|false|none|
+
+> Example responses
+
+> 400 Response
+
+```json
+{
+  "type": "string",
+  "title": "string",
+  "status": 0,
+  "detail": "string",
+  "instance": "string",
+  "property1": null,
+  "property2": null
+}
+```
+
+<h3 id="post__api_v1_client_deletecustomerworklocationcontact-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|None|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
+|417|[Expectation Failed](https://tools.ietf.org/html/rfc7231#section-6.5.14)|Client Error|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|None|
 
 <aside class="warning">
@@ -2514,7 +3125,6 @@ Bearer
 ```shell
 # You can also use wget
 curl -X POST /api/v1/Login/Logout \
-  -H 'Content-Type: application/json' \
   -H 'Accept: application/json' \
   -H 'Authorization: API_KEY'
 
@@ -2523,17 +3133,13 @@ curl -X POST /api/v1/Login/Logout \
 ```http
 POST /api/v1/Login/Logout HTTP/1.1
 
-Content-Type: application/json
 Accept: application/json
 
 ```
 
 ```javascript
-const inputBody = '{
-  "emailId": "user@example.com"
-}';
+
 const headers = {
-  'Content-Type':'application/json',
   'Accept':'application/json',
   'Authorization':'API_KEY'
 };
@@ -2541,7 +3147,7 @@ const headers = {
 fetch('/api/v1/Login/Logout',
 {
   method: 'POST',
-  body: inputBody,
+
   headers: headers
 })
 .then(function(res) {
@@ -2557,7 +3163,6 @@ require 'rest-client'
 require 'json'
 
 headers = {
-  'Content-Type' => 'application/json',
   'Accept' => 'application/json',
   'Authorization' => 'API_KEY'
 }
@@ -2573,7 +3178,6 @@ p JSON.parse(result)
 ```python
 import requests
 headers = {
-  'Content-Type': 'application/json',
   'Accept': 'application/json',
   'Authorization': 'API_KEY'
 }
@@ -2590,7 +3194,6 @@ print(r.json())
 require 'vendor/autoload.php';
 
 $headers = array(
-    'Content-Type' => 'application/json',
     'Accept' => 'application/json',
     'Authorization' => 'API_KEY',
 );
@@ -2645,7 +3248,6 @@ import (
 func main() {
 
     headers := map[string][]string{
-        "Content-Type": []string{"application/json"},
         "Accept": []string{"application/json"},
         "Authorization": []string{"API_KEY"},
     }
@@ -2664,20 +3266,6 @@ func main() {
 `POST /api/v1/Login/Logout`
 
 *Logouts this instance.*
-
-> Body parameter
-
-```json
-{
-  "emailId": "user@example.com"
-}
-```
-
-<h3 id="post__api_v1_login_logout-parameters">Parameters</h3>
-
-|Name|In|Type|Required|Description|
-|---|---|---|---|---|
-|body|body|[SLP.Services.Domain.Model.Request.LogOutRequestModel](#schemaslp.services.domain.model.request.logoutrequestmodel)|false|none|
 
 > Example responses
 
@@ -2701,6 +3289,7 @@ func main() {
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|None|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
+|417|[Expectation Failed](https://tools.ietf.org/html/rfc7231#section-6.5.14)|Client Error|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|None|
 
 <aside class="warning">
@@ -2888,6 +3477,7 @@ func main() {
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|None|
 |400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|None|
 
 <aside class="warning">
@@ -3661,7 +4251,7 @@ func main() {
 
 > Example responses
 
-> 417 Response
+> 400 Response
 
 ```
 {"type":"string","title":"string","status":0,"detail":"string","instance":"string","property1":null,"property2":null}
@@ -3684,7 +4274,8 @@ func main() {
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|None|
-|417|[Expectation Failed](https://tools.ietf.org/html/rfc7231#section-6.5.14)|Client Error|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|None|
 
 <aside class="warning">
@@ -3864,7 +4455,7 @@ func main() {
 
 > Example responses
 
-> 417 Response
+> 400 Response
 
 ```
 {"type":"string","title":"string","status":0,"detail":"string","instance":"string","property1":null,"property2":null}
@@ -3887,7 +4478,8 @@ func main() {
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|None|
-|417|[Expectation Failed](https://tools.ietf.org/html/rfc7231#section-6.5.14)|Client Error|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|None|
 
 <aside class="warning">
@@ -4067,7 +4659,7 @@ func main() {
 
 > Example responses
 
-> 417 Response
+> 400 Response
 
 ```
 {"type":"string","title":"string","status":0,"detail":"string","instance":"string","property1":null,"property2":null}
@@ -4090,7 +4682,8 @@ func main() {
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|Success|None|
-|417|[Expectation Failed](https://tools.ietf.org/html/rfc7231#section-6.5.14)|Client Error|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
+|400|[Bad Request](https://tools.ietf.org/html/rfc7231#section-6.5.1)|Bad Request|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
+|404|[Not Found](https://tools.ietf.org/html/rfc7231#section-6.5.4)|Not Found|[Microsoft.AspNetCore.Mvc.ProblemDetails](#schemamicrosoft.aspnetcore.mvc.problemdetails)|
 |500|[Internal Server Error](https://tools.ietf.org/html/rfc7231#section-6.6.1)|Server Error|None|
 
 <aside class="warning">
@@ -4439,6 +5032,26 @@ Bearer
 |contactDetails|string¦null|false|none|none|
 |isExport|integer(int32)|false|none|none|
 
+<h2 id="tocS_SLP.Services.Domain.Model.Request.Client.DeleteCustomerWorkLocationContactRequestModel">SLP.Services.Domain.Model.Request.Client.DeleteCustomerWorkLocationContactRequestModel</h2>
+<!-- backwards compatibility -->
+<a id="schemaslp.services.domain.model.request.client.deletecustomerworklocationcontactrequestmodel"></a>
+<a id="schema_SLP.Services.Domain.Model.Request.Client.DeleteCustomerWorkLocationContactRequestModel"></a>
+<a id="tocSslp.services.domain.model.request.client.deletecustomerworklocationcontactrequestmodel"></a>
+<a id="tocsslp.services.domain.model.request.client.deletecustomerworklocationcontactrequestmodel"></a>
+
+```json
+{
+  "custWorkLocation_ContactId": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|custWorkLocation_ContactId|integer(int32)|false|none|none|
+
 <h2 id="tocS_SLP.Services.Domain.Model.Request.Client.FetchWorkLocationsRequestModel">SLP.Services.Domain.Model.Request.Client.FetchWorkLocationsRequestModel</h2>
 <!-- backwards compatibility -->
 <a id="schemaslp.services.domain.model.request.client.fetchworklocationsrequestmodel"></a>
@@ -4464,6 +5077,36 @@ Bearer
 |searchKey|string¦null|false|none|none|
 |pageNumber|integer(int32)|false|none|none|
 |pageSize|integer(int32)|false|none|none|
+
+<h2 id="tocS_SLP.Services.Domain.Model.Request.Client.GetCustomerWLContactsRequestModel">SLP.Services.Domain.Model.Request.Client.GetCustomerWLContactsRequestModel</h2>
+<!-- backwards compatibility -->
+<a id="schemaslp.services.domain.model.request.client.getcustomerwlcontactsrequestmodel"></a>
+<a id="schema_SLP.Services.Domain.Model.Request.Client.GetCustomerWLContactsRequestModel"></a>
+<a id="tocSslp.services.domain.model.request.client.getcustomerwlcontactsrequestmodel"></a>
+<a id="tocsslp.services.domain.model.request.client.getcustomerwlcontactsrequestmodel"></a>
+
+```json
+{
+  "intStart": 0,
+  "intPageSize": 0,
+  "intSortColumn": 0,
+  "sortDirection": "string",
+  "customerWorkLocationId": 0,
+  "customerContactId": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|intStart|integer(int32)|false|none|none|
+|intPageSize|integer(int32)|false|none|none|
+|intSortColumn|integer(int32)|false|none|none|
+|sortDirection|string¦null|false|none|none|
+|customerWorkLocationId|integer(int32)¦null|false|none|none|
+|customerContactId|integer(int32)¦null|false|none|none|
 
 <h2 id="tocS_SLP.Services.Domain.Model.Request.CreateJobRequestModel">SLP.Services.Domain.Model.Request.CreateJobRequestModel</h2>
 <!-- backwards compatibility -->
@@ -4601,26 +5244,6 @@ Bearer
 |city_name|string¦null|false|none|none|
 |state_id|integer(int32)|false|none|none|
 |country_id|integer(int32)|false|none|none|
-
-<h2 id="tocS_SLP.Services.Domain.Model.Request.LogOutRequestModel">SLP.Services.Domain.Model.Request.LogOutRequestModel</h2>
-<!-- backwards compatibility -->
-<a id="schemaslp.services.domain.model.request.logoutrequestmodel"></a>
-<a id="schema_SLP.Services.Domain.Model.Request.LogOutRequestModel"></a>
-<a id="tocSslp.services.domain.model.request.logoutrequestmodel"></a>
-<a id="tocsslp.services.domain.model.request.logoutrequestmodel"></a>
-
-```json
-{
-  "emailId": "user@example.com"
-}
-
-```
-
-### Properties
-
-|Name|Type|Required|Restrictions|Description|
-|---|---|---|---|---|
-|emailId|string(email)|true|none|none|
 
 <h2 id="tocS_SLP.Services.Domain.Model.Request.LoginRequestModel">SLP.Services.Domain.Model.Request.LoginRequestModel</h2>
 <!-- backwards compatibility -->
